@@ -1,0 +1,33 @@
+{
+  "name": "Signposting Sniffing",
+  "version": "1.0",
+  "icons": {
+    "48": "logo.png"
+  },
+  "manifest_version": 3,
+  "description": "Sniffs the webpage for signposting.org links, so that users can see what the robots see.",
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_start",
+      "matches": ["<all_urls>"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["logo.svg", "copy.svg"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "permissions": [
+    "webRequest",
+    "storage",
+    "webNavigation",
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": ["<all_urls>"]
+}
