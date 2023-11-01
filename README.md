@@ -7,6 +7,8 @@ The presence of such headers is reported as a dismissible banner on the page.
 The goal is signposting is to let robot clients navigate to metadata associated with a typically human-readable landing page for a dataset.
 The goal of this browser extension is to make those robot-navigable links human-readable.
 
+![Screenshot of a scientific landing page with signposting headers detected](example.png)
+
 ## Setup
 * Clone this repository
 * Open Chrome/Chromium/Chromium-based browsers
