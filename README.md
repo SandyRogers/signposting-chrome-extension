@@ -15,4 +15,4 @@ The goal of this browser extension is to make those robot-navigable links human-
 * Navigate to [chrome://extensions](chrome://extensions)
 * Toggle on "Developer mode"
 * "Load unpacked", and select the folder containing the repository
-* Browse the scholary web; e.g. try visiting [a sample on the HoloFood Data Portal](https://www.holofooddata.org/sample/SAMEA10104908) or [Stian Soiland-Reyes' test pages](https://s11.no/2022/a2a-fair-metrics/).
+* Browse the scholarly web; e.g. try visiting [a sample on the HoloFood Data Portal](https://www.holofooddata.org/sample/SAMEA10104908) or [Stian Soiland-Reyes' test pages](https://s11.no/2022/a2a-fair-metrics/).
