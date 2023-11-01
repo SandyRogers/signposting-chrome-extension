@@ -4,7 +4,7 @@ This Chrome browser extension sniffs for the presence of [signposting.org](https
 
 The presence of such headers is reported as a dismissible banner on the page.
 
-The goal is signposting is to let robot clients navigate to metadata associated with a typically human-readable landing page for a dataset.
+The goal of signposting is to let robot clients navigate to metadata associated with a typically human-readable landing page for a dataset.
 The goal of this browser extension is to make those robot-navigable links human-readable.
 
 ![Screenshot of a scientific landing page with signposting headers detected](example.png)
