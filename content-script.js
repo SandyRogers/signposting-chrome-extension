@@ -53,7 +53,10 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
   for (const [key, { newValue: signposts }] of Object.entries(changes)) {
     if (key === document.location.href) {
       if (signposts) {
-        document.getElementById("signposting-org-notices").remove();
+        const noticesEl = document.getElementById("signposting-org-notices");
+        if (noticesEl) {
+          noticesEl.remove();
+        }
         signposts.forEach(renderSignpost);
       }
     }
