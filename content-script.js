@@ -36,7 +36,7 @@ const renderSignpost = (signpost) => {
     signpostingLinkHTML = `${signpostingLinkHTML} with a profile at <a href="${signpost.profile}">${signpost.profile}</a>`;
   }
 
-  const copyButtonHTML = `<button onClick="javascript:navigator.clipboard.writeText('${signpost.url}')" style="${copyButtonStyle}"><img src="${copyIcon}" height="16px"/></button>`;
+  const copyButtonHTML = `<button onClick="javascript:navigator.clipboard.writeText('${signpost.url}')" style="${copyButtonStyle}"><img src="${copyIcon}" height="16px" width="16px"/></button>`;
 
   signpostBar.innerHTML = `${existingHTML}${signpostingIntro} ${signpost.relationship} ${signpostingLinkHTML} ${copyButtonHTML}<br/>`;
 };
