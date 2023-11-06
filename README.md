@@ -16,3 +16,16 @@ The goal of this browser extension is to make those robot-navigable links human-
 * Toggle on "Developer mode"
 * "Load unpacked", and select the folder containing the repository
 * Browse the scholarly web; e.g. try visiting [a sample on the HoloFood Data Portal](https://www.holofooddata.org/sample/SAMEA10104908) or [Stian Soiland-Reyes' test pages](https://s11.no/2022/a2a-fair-metrics/).
+
+## Status
+This extension is a PoC.
+
+### Notable lacking features:
+
+- support for Signposting in [Linksets](https://signposting.org/linkset/)
+- warning of / deterministic resolution of clashing headers between HTTP and HTML
+- test suite (perhaps running through [s11.no/2022/a2a-fair-metrics/](https://s11.no/2022/a2a-fair-metrics/)?)
+- encapsulated CSS
+- arguably unneccesary use of storage API; could be achieved with message handlers instead
+- submission to [Chrome Web Store](https://developer.chrome.com/docs/extensions/)
+- Firefox / Edge version
