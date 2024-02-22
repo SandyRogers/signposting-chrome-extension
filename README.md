@@ -20,6 +20,17 @@ The goal of this browser extension is to make those robot-navigable links human-
 ## Status
 This extension is a PoC.
 
+## Contributions
+Are very welcome via Issues and/or Pull Requests.
+
+## Privacy and data collection
+This extension requires several permissions to read the data in your web browser.
+These permissions are required so that the extension can read the presence and content of Signposting links in both the HTTP headers, and the HTML content, of the scholarly webpages you are visiting / developing.
+The current permissions required are detailed in the `manifest.json` file of this code repostiory.
+Note that none of the data collected and/or created by these permissions is sent over the network to any remote code or database.
+Neither the developers of this extension, nor the owners of the signposted websites you visit, receive any additional information collected or processed by this extension. It is purely a client side (i.e., in your browser) extension to help with development and discovery of the scholarly web.
+
+
 ### Notable lacking features:
 
 - support for Signposting in [Linksets](https://signposting.org/linkset/)
@@ -29,3 +40,4 @@ This extension is a PoC.
 - arguably unneccesary use of storage API; could be achieved with message handlers instead
 - submission to [Chrome Web Store](https://developer.chrome.com/docs/extensions/)
 - Firefox / Edge version
+
