@@ -94,7 +94,7 @@ chrome.webRequest.onHeadersReceived.addListener(
   ["responseHeaders", "extraHeaders"],
 );
 
-chrome.runtime.onInstalled.addListener(() => {
+function htmlListener () {
   chrome.webNavigation.onDOMContentLoaded.addListener((details) => {
     const tabId = details.tabId;
 
@@ -115,7 +115,10 @@ chrome.runtime.onInstalled.addListener(() => {
         });
     }
   });
-});
+}
+
+chrome.runtime.onInstalled.addListener(htmlListener);
+chrome.runtime.onStartup.addListener(htmlListener);
 
 function findSignpostLinks(signpostRelations) {
   const links = Array.from(document.querySelectorAll("link"));
