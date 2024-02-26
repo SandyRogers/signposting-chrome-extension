@@ -9,7 +9,11 @@ The goal of this browser extension is to make those robot-navigable links human-
 
 ![Screenshot of a scientific landing page with signposting headers detected](example.png)
 
-## Setup
+## Installation
+
+[Install the extension from the chrome web store.](https://chromewebstore.google.com/detail/signposting-sniffing/pahanegeimljfcnjogglnamnlcgipmbc)
+
+## Developer Setup
 * Clone this repository
 * Open Chrome/Chromium/Chromium-based browsers
 * Navigate to [chrome://extensions](chrome://extensions)
@@ -38,6 +42,5 @@ Neither the developers of this extension, nor the owners of the signposted websi
 - test suite (perhaps running through [s11.no/2022/a2a-fair-metrics/](https://s11.no/2022/a2a-fair-metrics/)?)
 - encapsulated CSS
 - arguably unneccesary use of storage API; could be achieved with message handlers instead
-- submission to [Chrome Web Store](https://developer.chrome.com/docs/extensions/)
 - Firefox / Edge version
 
