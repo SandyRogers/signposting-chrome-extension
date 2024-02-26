@@ -9,13 +9,16 @@ The goal of this browser extension is to make those robot-navigable links human-
 
 ![Screenshot of a scientific landing page with signposting headers detected](example.png)
 
-## Setup
+## Install
+* [Install from the Chrome Webstore](https://chromewebstore.google.com/detail/signposting-sniffing/pahanegeimljfcnjogglnamnlcgipmbc)
+* Browse the scholarly web; e.g. try visiting [a sample on the HoloFood Data Portal](https://www.holofooddata.org/sample/SAMEA10104908) or [Stian Soiland-Reyes' test pages](https://s11.no/2022/a2a-fair-metrics/).
+
+## Dev setup
 * Clone this repository
 * Open Chrome/Chromium/Chromium-based browsers
 * Navigate to [chrome://extensions](chrome://extensions)
 * Toggle on "Developer mode"
 * "Load unpacked", and select the folder containing the repository
-* Browse the scholarly web; e.g. try visiting [a sample on the HoloFood Data Portal](https://www.holofooddata.org/sample/SAMEA10104908) or [Stian Soiland-Reyes' test pages](https://s11.no/2022/a2a-fair-metrics/).
 
 ## Status
 This extension is a PoC.
@@ -38,6 +41,6 @@ Neither the developers of this extension, nor the owners of the signposted websi
 - test suite (perhaps running through [s11.no/2022/a2a-fair-metrics/](https://s11.no/2022/a2a-fair-metrics/)?)
 - encapsulated CSS
 - arguably unneccesary use of storage API; could be achieved with message handlers instead
-- submission to [Chrome Web Store](https://developer.chrome.com/docs/extensions/)
+- ~submission to [Chrome Web Store](https://developer.chrome.com/docs/extensions/)~
 - Firefox / Edge version
 
