@@ -24,6 +24,7 @@ const renderSignpost = (signpost) => {
     signpostBar.style.borderRadius = "4px";
     signpostBar.style.fontFamily = "sans-serif";
     signpostBar.style.overflow = "auto";
+    signpostBar.style.maxHeight = "50%"
     document.body.appendChild(signpostBar);
 
     signpostBar.innerHTML = `${logoHTML}${closeLinkHTML}`;
