@@ -135,3 +135,19 @@ function findSignpostLinks(signpostRelations) {
   });
   return allSignposts;
 }
+
+function actionListener() {
+  chrome.storage.local.get(['overlayEnabled'], (result) => {
+    const currentState = result.overlayEnabled !== undefined ? result.overlayEnabled : false;
+    const newState = !currentState;
+    chrome.storage.local.set({ overlayEnabled: newState }, () => {
+      if (newState) {
+        chrome.action.setIcon({ path: 'logo.png' })
+      } else {
+        chrome.action.setIcon({ path: 'logo-disabled.png' })
+      }
+    });
+  });
+}
+
+chrome.action.onClicked.addListener(actionListener);

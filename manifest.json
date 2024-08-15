@@ -28,5 +28,9 @@
     "webNavigation",
     "scripting"
   ],
-  "host_permissions": ["<all_urls>"]
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "name": "Toggle overlay",
+    "default_title": "Click to toggle on/off the overlay"
+  }
 }
