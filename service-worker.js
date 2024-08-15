@@ -138,7 +138,7 @@ function findSignpostLinks(signpostRelations) {
 
 function actionListener() {
   chrome.storage.local.get(['overlayEnabled'], (result) => {
-    const currentState = result.overlayEnabled !== undefined ? result.overlayEnabled : false;
+    const currentState = result.overlayEnabled !== undefined ? result.overlayEnabled : true;
     const newState = !currentState;
     chrome.storage.local.set({ overlayEnabled: newState }, () => {
       if (newState) {
