@@ -135,3 +135,27 @@ function findSignpostLinks(signpostRelations) {
   });
   return allSignposts;
 }
+
+function setIcon(state) {
+  const iconPath = state ? 'logo.png' : 'logo-disabled.png';
+  chrome.action.setIcon({ path: iconPath });
+}
+
+function actionListener() {
+  chrome.storage.local.get(['overlayEnabled'], (result) => {
+    const currentState = result.overlayEnabled !== undefined ? result.overlayEnabled : true;
+    const newState = !currentState;
+    chrome.storage.local.set({ overlayEnabled: newState }, () => {
+	  setIcon(newState);
+    });
+  });
+}
+
+chrome.action.onClicked.addListener(actionListener);
+
+chrome.runtime.onStartup.addListener(() => {
+  chrome.storage.local.get(['overlayEnabled'], (result) => {
+    console.log("startup overlay state", result.overlayEnabled);
+    setIcon(result.overlayEnabled !== undefined ? result.overlayEnabled : true );
+  });
+});

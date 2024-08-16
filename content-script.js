@@ -46,9 +46,12 @@ const renderSignpost = (signpost) => {
 (async () => {
   const pageUrl = document.location.href;
   const signposts = await chrome.storage.session.get([pageUrl]);
-  if (signposts[pageUrl]) {
-    signposts[pageUrl].forEach(renderSignpost);
-  }
+    chrome.storage.local.get(["overlayEnabled"], (result) => {
+      const overlayEnabled = result.overlayEnabled !== undefined ? result.overlayEnabled : true;
+      if (overlayEnabled && signposts[pageUrl]) {
+        signposts[pageUrl].forEach(renderSignpost);
+      }
+  });
 })();
 
 chrome.storage.onChanged.addListener((changes, namespace) => {
