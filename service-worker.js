@@ -9,6 +9,7 @@ const signpostRelations = {
   "cite-as": "should be cited as",
   type: "is of the type described at",
   license: "is licensed according to",
+  linkset: "has a linkset at",
 };
 
 chrome.storage.session.setAccessLevel({
