@@ -17,52 +17,50 @@ chrome.storage.session.setAccessLevel({
 });
 chrome.storage.session.clear();
 
-const getRelationFromHeaderValue = (value) => {
-  const relRegex = /rel="?([a-z, A-Z, -]*)"?/;
+// A link's relation types: rel="describedby", rel=describedby or rel="describedby item" (RFC 8288)
+const getRelationsFromLink = (link) => {
+  const relRegex = /;\s*rel\s*=\s*(?:"([^"]*)"|([^\s;,"]+))/i;
 
-  const relMatch = value.match(relRegex);
+  const relMatch = link.match(relRegex);
 
   if (relMatch) {
-    return relMatch[1].toLowerCase();
+    return (relMatch[1] ?? relMatch[2]).toLowerCase().split(/\s+/).filter(Boolean);
   }
-  return;
+  return [];
 };
+
+// A Link header can hold several links, including non-signposting ones such as rel="preload",
+// separated by commas. Split only on commas that start a new <URI>, as URIs may contain commas too.
+const splitLinkHeader = (value) => value.split(/,\s*(?=<)/);
 
 const headerHasSignposts = (header) => {
   if (!(header.name.toLowerCase() === "link")) return false;
-  if (header.value.indexOf("rel") < 0) return false;
-  const rel = getRelationFromHeaderValue(header.value);
-
-  if (signpostRelations[rel]) return true;
-  return false;
+  return getSignpostsFromHeader(header).length > 0;
 };
 
 const getSignpostsFromHeader = (header) => {
-  const hval = header.value;
-  const links = hval.split(",");
+  const links = splitLinkHeader(header.value);
   let signposts = [];
   links.forEach((link) => {
-    const rel = getRelationFromHeaderValue(link);
+    const urlMatch = link.match(/^\s*<([^>]*)>/);
+    if (!urlMatch) return;
 
-    if (!signpostRelations[rel]) return;
-
-    const urlRegex = /(?<=<)([^>]+)(?=>)/g;
-    const urlMatches = link.match(urlRegex);
-
-    const mimetypeRegex = /type="([^"]*)"/;
+    const mimetypeRegex = /;\s*type\s*=\s*"([^"]*)"/i;
     const mimetypeMatch = link.match(mimetypeRegex);
 
-    const profileRegex = /profile="([^"]*)"/;
+    const profileRegex = /;\s*profile\s*=\s*"([^"]*)"/i;
     const profileMatch = link.match(profileRegex);
 
-    const signpost = {
-      url: urlMatches[0],
-      relationship: signpostRelations[rel],
-      mimetype: mimetypeMatch ? mimetypeMatch[1] : null,
-      profile: profileMatch ? profileMatch[1] : null,
-    };
-
-    signposts.push(signpost);
+    getRelationsFromLink(link)
+      .filter((rel) => signpostRelations[rel])
+      .forEach((rel) => {
+        signposts.push({
+          url: urlMatch[1],
+          relationship: signpostRelations[rel],
+          mimetype: mimetypeMatch ? mimetypeMatch[1] : null,
+          profile: profileMatch ? profileMatch[1] : null,
+        });
+      });
   });
   return signposts;
 };
@@ -118,21 +116,26 @@ function htmlListener () {
   });
 }
 
-chrome.runtime.onInstalled.addListener(htmlListener);
-chrome.runtime.onStartup.addListener(htmlListener);
+// Register at the top level, so that the listener is added again whenever Chrome restarts the
+// (non-persistent) service worker, not only on install or browser startup.
+htmlListener();
 
 function findSignpostLinks(signpostRelations) {
   const links = Array.from(document.querySelectorAll("link"));
   let allSignposts = [];
   links.forEach((link) => {
-    if (link.rel && !!signpostRelations[link.rel.toLowerCase()]) {
-      allSignposts.push({
-        url: link.href,
-        relationship: signpostRelations[link.rel.toLowerCase()],
-        mimetype: link.type,
-        profile: null,
+    // rel may hold several space-separated relation types
+    Array.from(link.relList || [])
+      .map((rel) => rel.toLowerCase())
+      .filter((rel) => !!signpostRelations[rel])
+      .forEach((rel) => {
+        allSignposts.push({
+          url: link.href,
+          relationship: signpostRelations[rel],
+          mimetype: link.type,
+          profile: link.getAttribute("profile"),
+        });
       });
-    }
   });
   return allSignposts;
 }
